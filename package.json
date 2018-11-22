@@ -1,0 +1,32 @@
+{
+  "name": "cabcharge-test",
+  "version": "1.0.0",
+  "description": "carcharge code test",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "DEBUG=* nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "prod": "NODE_ENV=production node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyuan459/cabcharge-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boyuan459/cabcharge-test/issues"
+  },
+  "homepage": "https://github.com/boyuan459/cabcharge-test#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "config": "^3.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.6"
+  }
+}

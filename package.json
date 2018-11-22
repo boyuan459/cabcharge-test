@@ -4,7 +4,7 @@
   "description": "carcharge code test",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && yarn start",
+    "client": "cd frontend && yarn start",
     "server": "DEBUG=* nodemon ./bin/www",
     "start": "node ./bin/www",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",

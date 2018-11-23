@@ -14,6 +14,14 @@ export default class AppRouter extends Component {
                     exact
                     path="/dashboard/blank"
                     component={asyncComponent(() => import('../BlankPage'))}/>
+                <Route 
+                    exact
+                    path="/dashboard/sent"
+                    component={asyncComponent(() => import('../SentPage'))}/>
+                <Route 
+                    exact
+                    path="/dashboard/compose"
+                    component={asyncComponent(() => import('../ComposePage'))} />
             </Switch>
         );
     }

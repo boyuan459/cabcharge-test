@@ -1,0 +1,12 @@
+.email-label {
+  width: 35px;
+  line-height: 48px; }
+
+.emails-list {
+  flex: 1; }
+
+.emails-cc {
+  width: 100px;
+  line-height: 48px; }
+  .emails-cc a:last-of-type {
+    margin-left: 15px; }

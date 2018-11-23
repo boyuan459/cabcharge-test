@@ -87,7 +87,7 @@ const styles = theme => ({
 
 class App extends Component {
     state = {
-        open: false,
+        open: true,
         toggle: false
       };
     

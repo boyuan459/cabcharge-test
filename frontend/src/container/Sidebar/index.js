@@ -127,7 +127,7 @@ class Sidebar extends React.Component {
                         onClick={() => this.handleMenuClick('blank')} 
                         selected={menu === 'blank' ? true : false} 
                         className={classes.menuItem} 
-                        component={props => <Link to="/dashboard/blank" {...props} />}>
+                        component={props => <Link to="/dashboard/compose" {...props} />}>
                         <ListItemIcon className={classes.icon}>
                             <DraftsIcon />
                         </ListItemIcon>
@@ -137,7 +137,7 @@ class Sidebar extends React.Component {
                         onClick={() => this.handleMenuClick('sent')} 
                         selected={menu === 'sent' ? true : false} 
                         className={classes.menuItem} 
-                        component={props => <Link to="/dashboard/blank" {...props} />}>
+                        component={props => <Link to="/dashboard/sent" {...props} />}>
                         <ListItemIcon className={classes.icon}>
                             <MailIcon />
                         </ListItemIcon>

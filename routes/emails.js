@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var asyncMiddleware = require('../middleware/async').asyncMiddleware;
+var emailService = require('../lib/email');
 
 /* GET users listing. */
 router.post('/', asyncMiddleware(async (req, res, next) => {
@@ -9,9 +10,18 @@ router.post('/', asyncMiddleware(async (req, res, next) => {
   const bcc = req.body.bcc;
   const subject = req.body.subject;
   const text = req.body.text;
-  res.send({
-      to,cc,bcc,subject,text
-  })
+
+  // const result = await emailService.send({
+  //   to,subject,text
+  // });
+  // res.send(result)
+  emailService.sendCb({ to, subject, text }, (error, result) => {
+    if (error) {
+      res.send("Server error");
+      return;
+    }
+    res.send(result);
+  });
 }));
 
 module.exports = router;

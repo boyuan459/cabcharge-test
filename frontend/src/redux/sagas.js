@@ -1,6 +1,6 @@
-import { all } from 'redux-saga/effects';
+import { fork } from 'redux-saga/effects';
+import emailSaga from './email/saga';
 
 export default function* rootSaga(getState) {
-    yield all([
-    ]);
+    yield fork(emailSaga);
 }

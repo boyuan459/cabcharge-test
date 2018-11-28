@@ -17,7 +17,7 @@ router.post('/', asyncMiddleware(async (req, res, next) => {
   // res.send(result)
   emailService.sendCb({ to, subject, text }, (error, result) => {
     if (error) {
-      res.send("Server error");
+      res.status(500).send("Server error");
       return;
     }
     res.send(result);

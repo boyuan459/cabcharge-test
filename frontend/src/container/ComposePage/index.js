@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import EmailList from '../../component/EmailList';
 import Subject from '../../component/Subject';
+import * as Actions from '../../redux/email/actions';
+import { getEmailSent, getEmailLoading, getEmailError } from '../../selectors';
 import './style.css';
 
 const styles = theme => ({
@@ -25,8 +28,10 @@ class ComposePage extends Component {
         cc: false,
         bcc: false,
         subject: '',
+        text: '',
         toError: false,
         subjecError: false,
+        success: false,
     };
 
     handleDelete = (list, email) => {
@@ -118,15 +123,51 @@ class ComposePage extends Component {
         if (valid) {
             //send email
             console.log('Send email');
+            const { to, cc, bcc, subject, text } = this.state;
+            console.log({to, cc, bcc, subject, text});
+            const { sendEmail } = this.props;
+            sendEmail({to, cc, bcc, subject, text});
+        }
+    }
+
+    handleUserInput = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+        console.log(name, value);
+        this.setState({
+            [name]: value
+        });
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.sent.length !== prevProps.sent.length) {
+            console.log("new email sent");
+            this.setState({
+                success: true
+            }, () => setTimeout(() => {this.setState({success: false})}, 3000));
         }
     }
 
     render() {
-        const { classes } = this.props;
-        const { to, toEmail, cc, bcc, toError, subjecError } = this.state;
+        const { classes, error, loading } = this.props;
+        const { to, toEmail, cc, bcc, toError, subjecError, success } = this.state;
 
         return (
             <div className="container">
+                {
+                    success ? 
+                    <div class="alert alert-primary" role="alert">
+                        Wow, email has been sent !!
+                    </div>
+                    : null
+                }
+                {
+                    error ? 
+                    <div class="alert alert-danger" role="alert">
+                        Ooops! Something wrong !!
+                    </div>
+                    : null
+                }
                 <EmailList
                     items={to}
                     handleDelete={this.handleToDelete}
@@ -164,6 +205,8 @@ class ComposePage extends Component {
                 <Subject name="subject" onChange={this.handleSubjectChange} error={subjecError} />
                 <div className="row">
                     <TextField
+                        name="text"
+                        onChange={this.handleUserInput}
                         label="Content"
                         placeholder="Please enter content here"
                         fullWidth
@@ -177,8 +220,8 @@ class ComposePage extends Component {
                     />
                 </div>
                 <div className="row">
-                    <Button onClick={this.handleSubmit} variant="contained" color="primary" className={classes.button}>
-                        Send
+                    <Button onClick={this.handleSubmit} variant="contained" color="primary" disabled={loading} className={classes.button}>
+                        { loading ? 'Sending' : 'Send'}
                     </Button>
                 </div>
             </div>
@@ -187,5 +230,20 @@ class ComposePage extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        loading: getEmailLoading(state),
+        error: getEmailError(state),
+        sent: getEmailSent(state)
+    };
+}
 
-export default withStyles(styles)(ComposePage);
+function mapDispatchToProps(dispatch) {
+    return {
+        sendEmail(data) {
+            dispatch(Actions.sendEmail(data));
+        }
+    };
+}
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ComposePage));

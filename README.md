@@ -13,6 +13,14 @@ Files located under /
 
 
 # Demo Usage
+## install package for nodejs backend
+yarn install
+## install package for react frontend
+cd frontend
+yarn install
+
+## run demo
+cd .. (change directory to code base root directory)
 yarn dev or npm run dev
 
 ps: if any errors, pls install concurrently and nodemon global or local

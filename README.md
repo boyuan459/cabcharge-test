@@ -21,3 +21,5 @@ Following UI are only for prototype, not implemented in the backed:
 2. In Sent page, marked as read and delete is not implemented
 
 Backend only implemented mailgun, no time to do sendgrid
+
+Unit test only and front end component test only have skeleton

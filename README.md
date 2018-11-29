@@ -4,6 +4,13 @@ carcharge code test
 ## Single Page Web App Challenge #1
 Create a service (backend + frontend) that accepts the necessary information and sends emails. It should provide an abstraction between two different email service providers. If one of the services goes down, your service can quickly failover to a different provider without affecting your customers.
 
+# Tech Stack
+## React Frontend
+Files located under /frontend folder
+
+## Backend with NodeJS + Express
+Files located under /
+
 
 # Demo Usage
 yarn dev or npm run dev

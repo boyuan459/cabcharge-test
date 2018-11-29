@@ -16,14 +16,14 @@ Files located under /
 ## install package for nodejs backend
 yarn install
 ## install package for react frontend
-cd frontend
-yarn install
+cd frontend <br/>
+yarn install <br/>
 
 ## run demo
-cd .. (change directory to code base root directory)
-yarn dev or npm run dev
+cd .. (change directory to code base root directory) <br/>
+yarn dev or npm run dev <br/>
 
-ps: if any errors, pls install concurrently and nodemon global or local
+ps: if any errors, pls install concurrently and nodemon global or local<br/>
 npm install -g nodemon concurrently
 
 # How to use

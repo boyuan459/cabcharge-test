@@ -70,8 +70,9 @@ class EmailInput extends Component {
         return (
             <FormControl className={classes.formControl} error={error} aria-describedby="component-error-text">
                 <Input
+                    fullWidth
                     name="email"
-                    placeholder="Enter email here"
+                    placeholder="Hit enter after input"
                     onChange={this.handleUserInput}
                     onKeyPress={this.handleEnter}
                     value={email}

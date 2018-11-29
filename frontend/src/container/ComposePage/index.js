@@ -156,14 +156,14 @@ class ComposePage extends Component {
             <div className="container">
                 {
                     success ? 
-                    <div class="alert alert-primary" role="alert">
+                    <div className="alert alert-primary" role="alert">
                         Wow, email has been sent !!
                     </div>
                     : null
                 }
                 {
                     error ? 
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         Ooops! Something wrong !!
                     </div>
                     : null

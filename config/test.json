@@ -1,0 +1,7 @@
+{
+    "mailgun": {
+        "api_key": "key-664362f071eaa03030fd09e4d686c7f8",
+        "domain": "progetdata.com"
+    },
+    "base_url": "http://localhost:8081"
+}

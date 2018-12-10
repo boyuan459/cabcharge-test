@@ -10,7 +10,7 @@ var http = require('http');
 var cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-if (cluster.isMaster || process.env.NODE_ENV !== 'test') {
+if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
 
   // let numReqs = 0;

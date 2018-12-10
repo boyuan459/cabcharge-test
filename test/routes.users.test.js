@@ -2,6 +2,9 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const config = require('config');
+
+const server = config.get('base_url');
+
 chai.use(chaiHttp);
 
 describe('Routes: gets', () => {
@@ -15,7 +18,7 @@ describe('Routes: gets', () => {
 
     describe('GET /search', () => {
         test('Should return result object', async () => {
-            const res = await chai.request(config.get('base_url')).get('/api/users/search?q=yuan');
+            const res = await chai.request(server).get('/api/users/search?q=yuan');
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
         })

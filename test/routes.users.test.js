@@ -14,13 +14,27 @@ describe('Routes: gets', () => {
 
     afterEach(() => {
         console.log("Routes testing end....");
-    })
+    });
 
-    describe('GET /search', () => {
+    describe('GET /users/search', () => {
         test('Should return result object', async () => {
             const res = await chai.request(server).get('/api/users/search?q=yuan');
             expect(res.status).toEqual(200);
             expect(res.body).toBeDefined();
         })
-    })
+    });
+
+    describe('POST /users', () => {
+        test("Should created user", async () => {
+            const res = await chai.request(server).post('/api/users')
+                        .send({
+                            name: 'test',
+                            address: 'test',
+                            age: 10,
+                            dob: '1984-01-01',
+                            interests: 'unit test,feature test'
+                        });
+            expect(res.status).toEqual(200);
+        });
+    });
 });

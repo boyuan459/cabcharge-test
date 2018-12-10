@@ -10,4 +10,12 @@ router.get('/search', asyncMiddleware(async (req, res, next) => {
   res.send(result);
 }));
 
+router.post('/', asyncMiddleware(async (req,res, next) => {
+    const params = req.body;
+    console.log(params);
+    const result = await user.create(params);
+    console.log(result);
+    res.send(result);
+}));
+
 module.exports = router;

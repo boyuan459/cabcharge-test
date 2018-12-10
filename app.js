@@ -4,6 +4,7 @@ var cors = require('cors');
 var logger = require('morgan');
 
 var emailRouter = require('./routes/emails');
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/emails', emailRouter);
+app.use('/api/users', userRouter)
 
 console.log("NODE_ENV", process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {

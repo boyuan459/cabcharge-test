@@ -9,7 +9,7 @@
     "start": "node ./bin/www",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "prod": "NODE_ENV=production node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,11 @@
     "mailgun-js": "^0.22.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "jest": "^23.6.0",
+    "unit.js": "^2.0.0"
   }
 }

@@ -10,7 +10,7 @@ var http = require('http');
 var cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-if (cluster.isMaster) {
+if (cluster.isMaster || process.env.NODE_ENV !== 'test') {
   console.log(`Master ${process.pid} is running`);
 
   // let numReqs = 0;
@@ -124,4 +124,8 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+}
+
+module.exports = {
+  server
 }

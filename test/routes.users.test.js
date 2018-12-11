@@ -7,7 +7,7 @@ const server = config.get('base_url');
 
 chai.use(chaiHttp);
 
-describe('Routes: gets', () => {
+describe('Routes: posts', () => {
     beforeEach(() => {
         console.log("Routes testing start....");
     });

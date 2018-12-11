@@ -9,7 +9,7 @@
     "start": "node ./bin/www",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "prod": "NODE_ENV=production node ./bin/www",
-    "test": "jest --forceExit"
+    "test": "jest"
   },
   "repository": {
     "type": "git",

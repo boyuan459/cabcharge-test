@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var emailRouter = require('./routes/emails');
 var userRouter = require('./routes/user');
+var forumRouter = require('./routes/forum');
 
 var app = express();
 
@@ -18,7 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/emails', emailRouter);
-app.use('/api/users', userRouter)
+app.use('/api/users', userRouter);
+app.use('/api/forum', forumRouter);
 
 console.log("NODE_ENV", process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {

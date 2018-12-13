@@ -1002,5 +1002,180 @@ POST /_aliases
 
 GET /userlib/_search
 
+DELETE /forum
+
+PUT /forum
+{
+  "mappings": {
+    "article": {
+      "properties": {
+        "articleID": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+POST /forum/article/_bulk
+{"index": {"_id":1}}
+{"articleID": "XHDK-A-1293-#fJ3", "userID": 1, "hidden": false, "postDate": "2017-01-01"}
+{"index": {"_id":2}}
+{"articleID": "KDKE-B-9947-#kL5", "userID": 1, "hidden": false, "postDate": "2017-01-02"}
+{"index": {"_id":3}}
+{"articleID": "JODL-X-1937-#pV7", "userID": 2, "hidden": false, "postDate": "2017-01-01"}
+{"index": {"_id":4}}
+{"articleID": "QQPX-R-3956-#aD8", "userID": 2, "hidden": true, "postDate": "2017-01-02"}
+
+GET /forum/_mapping/article
+
+GET /forum/_analyze
+{
+  "field": "articleID",
+  "text": "XHDK-A-1293-#fJ3"
+}
+
+GET /forum/article/_search
+
+GET /forum/article/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "term": {
+          "articleID": "QQPX-R-3956-#aD8"
+        }
+      }
+    }
+  }
+}
+
+GET /forum/article/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "bool": {
+          "should": [
+            { "term": {"postDate": "2017-01-01"}},
+            { "term": {"articleID": "KDKE-B-9947-#kL5"}}
+            ],
+           "must_not": [
+             {"term": {"postDate": "2017-01-02"}}
+             ]
+        }
+      }
+    }
+  }
+}
+
+GET /forum/article/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "bool": {
+          "should": [
+            {
+              "term": {
+                "articleID": "XHDK-A-1293-#fJ3"
+              }
+            },
+            {
+              "bool": {
+                "must": [
+                  {"term": {
+                    "articleID": "JODL-X-1937-#pV7"
+                  }}
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+POST /forum/article/_bulk
+{"update":{"_id":1}}
+{"doc":{"tag":["java","hadoop"]}}
+{"update":{"_id":2}}
+{"doc":{"tag":["java"]}}
+{"update":{"_id":3}}
+{"doc":{"tag":["hadoop"]}}
+{"update":{"_id":4}}
+{"doc":{"tag":["java","elasticsearch"]}}
+
+GET /forum/article/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "terms": {
+          "articleID": ["KDKE-B-9947-#kL5", "JODL-X-1937-#pV7"]
+        }
+      },
+      "boost": 1.2
+    }
+  }
+}
+
+GET /forum/article/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "terms": {
+          "tag": ["java"]
+        }
+      },
+      "boost": 1.2
+    }
+  }
+}
+
+POST /forum/article/_bulk
+{"update":{"_id":1}}
+{"doc":{"tag_cnt":2}}
+{"update":{"_id":2}}
+{"doc":{"tag_cnt":1}}
+{"update":{"_id":3}}
+{"doc":{"tag_cnt":1}}
+{"update":{"_id":4}}
+{"doc":{"tag_cnt":2}}
+
+GET /forum/article/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "bool": {
+          "must": [
+              {
+                "terms": {
+                  "tag": [
+                    "java"
+                  ]
+                }
+              },
+              {
+                "term": {
+                  "tag_cnt": 1
+                }
+              }
+            ]
+        }
+      },
+      "boost": 1.2
+    }
+  }
+}
+
+
+
+
+
+
 
 
